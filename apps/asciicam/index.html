@@ -1,195 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>One HTML Page Challenge</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="./meta/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="./meta/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./meta/favicon-16x16.png">
-    <link rel="manifest" href="./meta/site.webmanifest">
-    <link rel="mask-icon" href="./meta/safari-pinned-tab.svg" color="#ffa500">
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144023646-1"></script>
-    <script>
-	    window.dataLayer = window.dataLayer || [];
-	    function gtag(){dataLayer.push(arguments);}
-	    gtag('js', new Date());
-	    gtag('config', 'UA-144023646-1');
-    </script>
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <meta property="og:title" content="One HTML Page Challenge">
-    <meta property="og:image" content="https://repository-images.githubusercontent.com/194445383/571a9000-9cd0-11e9-9a72-2faf76647a01">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <head>
+    <!-- Meta tags added due to entries.js deprecation on July 8th, 2025 -->
+    <meta name="description" content="Display camera output in colourised ASCII">
+    <meta name="github" content="iveseenthedark">
+    <meta charset="UTF-8" />
+    <meta name="author" content="iveseenthedark" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#333333" />
+
+    <title>A S C I I C A M</title>
     <style>
-				.jumbotron {
-						text-align: center;
-				}
-
-				.logo {
-						max-width: 70%;
-				}
-
-				body {
-						background: repeating-linear-gradient(
-								45deg,
-								#000000,
-								#1e1e1e 10px,
-								#15191d 10px,
-								#15191d 20px
-						);
-				}
-
-				.card-text:nth-of-type(2)::before {
-					display: inline-block;
-					content: 'Supported in:';
-					margin-right: 0.5em;
-				}
+      #ascii-cam pre,
+      body,
+      html {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        overflow: hidden;
+        background-color: #000;
+        color: #eee;
+        font-family: monospace;
+      }
+      #logo,
+      #enable-cam-msg {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+      }
+      .fade {
+        transition: opacity 0.25s ease-in-out;
+      }
+      #logo {
+        line-height: 1.5;
+      }
+      #ascii-cam {
+        opacity: 0;
+      }
+      #ascii-cam pre {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        line-height: 0.6;
+        user-select: none;
+        mix-blend-mode: screen;
+        font-size: 1.2em;
+        font-size: 2vh;
+      }
+      @media (max-height: 50em) {
+        #ascii-cam pre {
+          font-size: 1em;
+        }
+      }
+      @media (min-height: 60em) {
+        #ascii-cam pre {
+          font-size: 1.2em;
+        }
+      }
+      #ascii-cam #r-output {
+        color: red;
+      }
+      #ascii-cam #g-output {
+        color: #0f0;
+      }
+      #ascii-cam #b-output {
+        color: #00f;
+      }
+      #enable-cam-msg {
+        opacity: 0;
+        font-size: 3rem;
+        background-color: white;
+        color: black;
+        margin: 0;
+        max-width: 50vw;
+        white-space: pre-line;
+        text-align: center;
+        font-weight: 900;
+      }
+      #canvas,
+      #video {
+        display: none;
+      }
     </style>
-</head>
-<body>
-		<div class="container">
-				<br/>
+  </head>
 
-				<div class="card">
-						<div class="card-body">
-								<div class="jumbotron">
-										<img src="./meta/one-html-page-logo.png" alt="One Html Page Challenge" class="logo"/>
-										<hr class="my-4">
-										<p>The goal is to create anything you want within 1 single html file. Practice your skills with no assistance from libraries, no separation of files, and no assistance of a modern framework. <b>How creative can you be with such restrictions?</b></p>
-										<a class="btn btn-primary btn-lg" href="https://github.com/Metroxe/one-html-page-challenge/blob/master/README.md#how-to-submit" role="button">Submit an Entry</a>
-										<a class="btn btn-primary btn-lg" href="https://github.com/Metroxe/one-html-page-challenge" role="button">Github</a>
-								</div>
-								<div class="input-group flex-nowrap">
-										<input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="addon-wrapping" id="search" oninput="searchOnInput()">
-										<div class="input-group-append">
-												<span class="input-group-text" id="addon-wrapping">🔍</span>
-										</div>
-								</div>
-								<div id="list"></div>
-						</div>
-				</div>
-		</div>
-<br/>
+  <body>
+    <pre id="logo" class="fade">
+   _
+   _n_|_|_,_
+  |===.-.===|
+  |  ((_))  |
+  '==='-'==='
+A S C I I C A M
+    </pre>
 
-<script src="./entries.js"></script>
-<script>
-    // sort based on title
-    const sortedEntries = entries.sort((a,b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+    <pre id="enable-cam-msg" class="fade">Allow access to camera to use</pre>
 
-    // create initial list
-    searchOnInput();
+    <div id="ascii-cam" class="fade">
+      <div class="layers">
+        <pre id="r-output"></pre>
+        <pre id="g-output"></pre>
+        <pre id="b-output"></pre>
+      </div>
+    </div>
 
-		function searchOnInput() {
-				//get elements
-				const filter = document.getElementById("search").value.toLowerCase();
-				const list = document.getElementById("list");
+    <video id="video" autoplay="true"></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+    <script type="application/javascript">
+      (() => {
+        'use strict';
 
-				// remove children
-				while (list.firstChild) {
-						list.removeChild(list.firstChild);
-				}
+        let interval;
+        let r_layer, g_layer, b_layer;
+        const palette = [' ', '.', '-', ':', '+', '*', '=', '%', '@', '#'];
+        const vanity = 'B Y  I V E S E E N T H E D A R K';
 
-				// filter list
-				const filteredEntries = sortedEntries.filter((entry) => {
-						let key;
-						for (key in entry) {
-								if (entry.hasOwnProperty(key)) {
-										const prop = entry[key];
-										if (typeof prop === "string" && prop.toLowerCase().includes(filter)) {
-												return true;
-										}
-								}
-						}
-						return false;
-				});
+        /**
+         * @param {*} stream
+         */
+        const handle_video = stream => {
+          const canvas = document.getElementById('canvas');
+          const ctx = canvas.getContext('2d');
 
-				// create list
-				filteredEntries.forEach(({title, description, filename, github, author, compatibleBrowsers}) => {
-						// horizontal rule
-						const hr = document.createElement("hr");
-						list.appendChild(hr);
+          const video = document.getElementById('video');
+          // Older browsers may not have srcObject
+          if ('srcObject' in video) {
+            video.srcObject = stream;
+          } else {
+            // Avoid using this in new browsers, as it is going away.
+            video.src = window.URL.createObjectURL(stream);
+          }
+          video.addEventListener('loadedmetadata', () => {
+            window.addEventListener('resize', () => set_canvas_dimensions(video, canvas, ctx));
+            set_canvas_dimensions(video, canvas, ctx);
 
-						const card = document.createElement("div");
-						card.className = "card";
+            // Hide Logo
+            play_video(video, canvas, ctx);
+            setTimeout(() => {
+              document.getElementById('logo').style.opacity = 0;
+              document.getElementById('ascii-cam').style.opacity = 1;
+            }, 1000);
+          });
+        };
 
-						const body = document.createElement("div");
-						body.className = "card-body";
-						card.appendChild(body);
+        /**
+         */
+        const handle_no_video = () => {
+          setTimeout(() => {
+            document.getElementById('logo').style.opacity = 0;
+            document.getElementById('ascii-cam').style.opacity = 1;
+            document.getElementById('enable-cam-msg').style.opacity = 1;
+            play_random();
+          }, 1000);
+        };
 
-						// title
-						const cardTitle = document.createElement("h5");
-						const cardTitleNode = document.createTextNode(title);
-						cardTitle.className = "card-title";
-						cardTitle.appendChild(cardTitleNode);
-						body.appendChild(cardTitle);
+        /**
+         * @param {*} e
+         */
+        const handle_error = e => {
+          console.error('Error', e);
+          handle_no_video();
+        };
 
-						// author
-						if (author) {
-								const authorSubtitle = document.createElement("h6");
-								const authorSubtitleNode = document.createTextNode(author);
-								authorSubtitle.className = "card-subtitle mb-2 text-muted";
-								authorSubtitle.appendChild(authorSubtitleNode);
-								body.appendChild(authorSubtitle);
-						}
+        /**
+         * The greyscale value is calculated GREY = 0.299 * RED + 0.587 * GREEN + 0.114 * BLUE
+         * For more information see http://en.wikipedia.org/wiki/Grayscale
+         * @param {Array} image_data
+         */
+        const fade_to_grey = pixels => pixels.map(pixel => pixel[0] * 0.299 + pixel[1] * 0.587 + pixel[2] * 0.114);
 
-						// description
-						if (description) {
-								const cardDescription = document.createElement("p");
-								const cardDescriptionNode = document.createTextNode(description);
-								cardDescription.className = "card-text";
-								cardDescription.appendChild(cardDescriptionNode);
-								body.appendChild(cardDescription);
-						}
+        /**
+         */
+        const play_video = (video, canvas, ctx) => {
+          clearInterval(interval);
 
-						// browser list
-						if (compatibleBrowsers) {
-								const browserList = document.createElement("p");
-								const browser = compatibleBrowsers.join(", ");
-								const browserNameNode = document.createTextNode(browser);
-								browserList.className = "card-text";
-								browserList.appendChild(browserNameNode);
-								body.appendChild(browserList);
-						}
+          // Buffer reverse
+          ctx.drawImage(video, 0, 0, canvas.width * -1, canvas.height);
 
-						// toolbar
-						const toolbar = document.createElement("div");
-						const group1 = document.createElement("div");
-						const group2 = document.createElement("div");
-						toolbar.className = "btn-toolbar";
-						group1.className = "btn-group mr-2";
-						group2.className = "btn-group mr-2";
-						toolbar.appendChild(group1);
-						toolbar.appendChild(group2);
-						body.appendChild(toolbar);
+          // Grab view
+          const dx = canvas.dataset.hoffset || 0;
+          const dy = canvas.dataset.voffset || 0;
+          const image_width = canvas.width - dx * 2;
+          const image_data = ctx.getImageData(dx, dy, image_width, canvas.height - dy * 2).data;
 
-						// HTML Link
-						const linkButton = document.createElement("a");
-						const linkButtonNode = document.createTextNode(filename);
-						linkButton.className = "btn btn-primary btn-md";
-						linkButton.href = `./entries/${filename}`;
-						linkButton.appendChild(linkButtonNode);
-						group1.appendChild(linkButton);
+          // Chunk
+          const channels = 4;
+          const pixels = Array.from(Array(Math.ceil(image_data.length / channels)), (_, i) =>
+            image_data.slice(i * channels, i * channels + channels)
+          );
 
-						// Source Code Link
-						const sourceCodeButton = document.createElement("a");
-						const sourceCodeNode = document.createTextNode("Source");
-						sourceCodeButton.className = "btn btn-secondary btn-md";
-						sourceCodeButton.href = `https://github.com/Metroxe/one-html-page-challenge/blob/master/entries/${filename}`;
-						sourceCodeButton.appendChild(sourceCodeNode);
-						group1.appendChild(sourceCodeButton);
+          // Draw
+          let r_output = '';
+          let g_output = '';
+          let b_output = '';
+          pixels.forEach((pixel, i) => {
+            // Break for new line
+            if (i && i % image_width === 0) {
+              r_output += '\n';
+              g_output += '\n';
+              b_output += '\n';
+            }
 
-						// github button
-						if (github) {
-								const githubButton = document.createElement("a");
-								const githubButtonNode = document.createTextNode("Github");
-								githubButton.className = "btn btn-primary btn-md";
-								githubButton.href = `https://github.com/${github}`;
-								githubButton.appendChild(githubButtonNode);
-								group2.appendChild(githubButton);
-						}
-						list.appendChild(card);
-				})
-    }
-</script>
-</body>
+            const b_idx = Math.floor((pixel[2] / 255.0) * (palette.length - 1));
+            const r_idx = Math.floor((pixel[0] / 255.0) * (palette.length - 1));
+            const g_idx = Math.floor((pixel[1] / 255.0) * (palette.length - 1));
+
+            if (i && i >= image_width - vanity.length && i < image_width) {
+              // Input vanity message
+              r_output += vanity[vanity.length + i - image_width];
+              g_output += vanity[vanity.length + i - image_width];
+              b_output += palette[g_idx];
+            } else {
+              // Output camera data
+              r_output += palette[r_idx];
+              g_output += palette[g_idx];
+              b_output += palette[b_idx];
+            }
+          }, this);
+
+          r_layer.textContent = r_output;
+          g_layer.textContent = g_output;
+          b_layer.textContent = b_output;
+
+          interval = setInterval(() => play_video(video, canvas, ctx), 33);
+        };
+
+        /**
+         */
+        const play_random = () => {
+          clearInterval(interval);
+
+          const char_dims = get_character_dimensions();
+          const screen_dims = get_screen_dimensions(char_dims);
+          const total_chars = Math.floor(screen_dims.char_width * screen_dims.char_height);
+
+          const mid_x = Math.floor(screen_dims.char_width / 2);
+          const mid_y = Math.floor(screen_dims.char_height / 2);
+
+          let radius_sq = mid_x * mid_x + mid_y + mid_y;
+          radius_sq = radius_sq < 2500 ? 2500 : radius_sq; // Stop the circle getting too small
+
+          let r_output = '',
+            g_output = '',
+            b_output = '';
+          for (let i = 0; i < total_chars; i++) {
+            // Break for new line
+            if (i && i % screen_dims.char_width === 0) {
+              r_output += '\n';
+              g_output += '\n';
+              b_output += '\n';
+            }
+
+            const char_pos_x = i % screen_dims.char_width;
+            const char_pos_y = i / screen_dims.char_width;
+
+            let dist = (char_pos_x - mid_x) * (char_pos_x - mid_x) + (char_pos_y - mid_y) * (char_pos_y - mid_y);
+            dist = dist > radius_sq ? radius_sq : dist; // Distance can be further than radius, clamp
+
+            const range = Math.floor(palette.length * (1 - dist / radius_sq));
+            const r_idx = Math.floor(Math.random() * range);
+            const g_idx = Math.floor(Math.random() * range);
+            const b_idx = Math.floor(Math.random() * range);
+
+            r_output += palette[r_idx];
+            g_output += palette[g_idx];
+            b_output += palette[b_idx];
+          }
+
+          r_layer.textContent = r_output;
+          g_layer.textContent = g_output;
+          b_layer.textContent = b_output;
+
+          interval = setInterval(play_random, 100);
+        };
+
+        /**
+         */
+        const get_character_dimensions = () => {
+          const span = document.createElement('span');
+          span.textContent = 'X';
+          span.style.position = 'absolute';
+          span.style.left = '-100px';
+
+          document.querySelector('#ascii-cam pre').appendChild(span);
+          const dimensions = span.getBoundingClientRect();
+          span.remove();
+
+          return dimensions;
+        };
+
+        /**
+         */
+        const get_screen_dimensions = char_dims => {
+          return {
+            width: window.innerWidth,
+            height: window.innerHeight,
+            char_width: Math.ceil(window.innerWidth / char_dims.width),
+            char_height: Math.ceil(window.innerHeight / char_dims.height)
+          };
+        };
+
+        /**
+         */
+        const set_canvas_dimensions = (video, canvas, ctx) => {
+          console.log('setting canvas dimensions');
+          const char_dims = get_character_dimensions();
+          const screen_dims = get_screen_dimensions(char_dims);
+
+          let width = Math.floor(screen_dims.width / char_dims.width);
+          let height = Math.max(width * 0.75, screen_dims.char_height);
+
+          if (height > screen_dims.char_height) {
+            canvas.dataset.voffset = Math.floor((height - screen_dims.char_height) / 2);
+            canvas.dataset.hoffset = 0;
+          } else {
+            width = (height / 3) * 4;
+            canvas.dataset.hoffset = Math.floor((width - screen_dims.char_width) / 2);
+            canvas.dataset.voffset = 0;
+          }
+
+          video.width = canvas.width = width;
+          video.height = canvas.height = height;
+
+          // Reset scale if context exists
+          ctx && ctx.scale(-1, 1);
+        };
+
+        // Onload
+        window.addEventListener('load', () => {
+          if (navigator && navigator.mediaDevices) {
+            // Grab layers
+            r_layer = document.getElementById('r-output');
+            g_layer = document.getElementById('g-output');
+            b_layer = document.getElementById('b-output');
+
+            const constraints = { audio: false, video: {} };
+            navigator.mediaDevices
+              .getUserMedia(constraints)
+              .then(handle_video)
+              .catch(handle_error);
+          } else {
+            handle_no_video();
+          }
+        });
+      })();
+    </script>
+  </body>
 </html>
