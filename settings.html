@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html data-theme="night" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Settings | Night</title>
+  <link href="favicon.ico" id="favicon" rel="icon" type="image/png"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+</head>
+<body class="flex items-center justify-center min-h-screen relative overflow-y-auto">
+  <div class="stars" id="stars"></div>
+  <div class="content-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="text-xl font-bold glow-text">Settings</h2>
+      </div>
+      <ul>
+        <li>
+          <a class="flex items-center text-purple-500 tab-button active" data-tab="cloaking" href="#cloaking">
+            <img src="data/website icons/cloaking.png" alt="Cloaking Icon" class="mr-2" height="20" width="20">
+            Cloaking
+            <span class="tab-indicator"></span>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center text-gray-400 tab-button" data-tab="themes" href="#themes">
+            <img src="data/website icons/theme.png" alt="Themes Icon" class="mr-2" height="20" width="20">
+            Themes
+            <span class="tab-indicator"></span>
+          </a>
+        </li>
+        <li>
+          <a class="flex items-center text-gray-400 tab-button" data-tab="user" href="#user">
+            <img src="data/website icons/user.png" alt="User Icon" class="mr-2" height="20" width="20">
+            User
+            <span class="tab-indicator"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="tab-content active" id="cloaking">
+        <div class="flex flex-col items-center mb-6">
+          <label class="block text-xl md:text-2xl font-bold glow-text mb-2" for="tabTitle">Tab Name</label>
+          <input class="custom-input w-full bg-gray-800 text-white" id="tabTitle" placeholder="Night" type="text"/>
+        </div>
+        <div class="flex flex-col items-center mb-6">
+          <label class="block text-xl md:text-2xl font-bold glow-text mb-2" for="faviconUrl">Website Favicon</label>
+          <input class="custom-input w-full bg-gray-800 text-white" id="faviconUrl" placeholder="Enter website favicon (optional)" type="text"/>
+        </div>
+        <div class="content text-center relative z-10 w-full mt-7">
+          <h1 class="text-1xl md:text-2xl font-bold transition-transform duration-300 ease-in-out hover:scale-110 glow-text mb-8">
+            or use our custom presets:
+          </h1>
+          <div class="flex flex-wrap justify-center gap-4 mb-6">
+            <button class="circular-button" onclick="applyTabCloaking('Night', 'favicon.ico')">
+              <img alt="Default preset icon" height="60" src="favicon.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Google', 'data/favicons/google.ico')">
+              <img alt="Google preset icon" height="60" src="data/favicons/google.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('Home | Schoology', 'data/favicons/schoology.ico')">
+              <img alt="Schoology preset icon" height="60" src="data/favicons/schoology.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('My Apps', 'data/favicons/classlink.ico')">
+              <img alt="Classlink preset icon" height="60" src="data/favicons/classlink.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('Inbox', 'data/favicons/gmail.ico')">
+              <img alt="Gmail preset icon" height="60" src="data/favicons/gmail.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('Home', 'data/favicons/googleclassroom.ico')">
+              <img alt="Google Classroom preset icon" height="60" src="data/favicons/googleclassroom.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('My Drive', 'data/favicons/googledrive.ico')">
+              <img alt="Google Drive preset icon" height="60" src="data/favicons/googledrive.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Google Docs', 'data/favicons/googledocs.ico')">
+              <img alt="Google Docs preset icon" height="60" src="data/favicons/googledocs.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Google Forms', 'data/favicons/googleforms.ico')">
+              <img alt="Google Forms preset icon" height="60" src="data/favicons/googleforms.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Start your quiz', 'data/favicons/googleforms.ico')">
+              <img alt="Google Forms Lock Down Mode preset icon" height="60" src="data/favicons/googleforms.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Google Slides', 'data/favicons/googleslides.ico')">
+              <img alt="Google Slides preset icon" height="60" src="data/favicons/googleslides.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Google Sites', 'data/favicons/googlesites.ico')">
+              <img alt="Google Sites preset icon" height="60" src="data/favicons/googlesites.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('Home View Summary', 'data/favicons/hac.ico')">
+              <img alt="Home Access Center preset icon" height="60" src="data/favicons/hac.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('IXL | Math, Language Arts, Social Studies, and Spanish', 'data/favicons/ixl.ico')">
+              <img alt="IXL preset icon" height="60" src="data/favicons/ixl.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Math To Do, i-Ready', 'data/favicons/iready.ico')">
+              <img alt="i-Ready Math preset icon" height="60" src="data/favicons/iready.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('Reading To Do, i-Ready', 'data/favicons/iready.ico')">
+              <img alt="i-Ready Reading preset icon" height="60" src="data/favicons/iready.ico" width="60"/> </button>
+             <button class="circular-button" onclick="applyTabCloaking('Eduphoria! Login', 'data/favicons/noiconhere.ico')">
+              <img alt="Eduphoria preset icon" height="60" src="data/favicons/eduphoria.ico" width="60"/></button>
+             <button class="circular-button" onclick="applyTabCloaking('McGraw Hill Professional | Textbooks | Interactive Learning Solutions', 'data/favicons/mcgrawhill.ico')">
+              <img alt="McGraw Hill preset icon" height="60" src="data/favicons/mcgrawhill.ico" width="60"/></button>
+            </button>
+          </div>
+        </div>
+        <div class="mt-4 w-full max-w-xs mx-auto">
+          <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded" id="clear-button" onclick="applyTabCloaking('Night', 'favicon.ico'); location.reload();">
+            Clear Tab Cloak
+          </button>
+        </div>
+        <div class="mt-4 w-full max-w-xs mx-auto">
+          <label class="block text-xl md:text-2xl font-bold glow-text mb-2">about:blank</label>
+          <p class="text-sm text-gray-300 mb-4">Open an about:blank tab to: hide the URL of the website and hide your tabs history (highly recommended)</p>
+          <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded" onclick="openBlankWindow(); location.reload();">
+            Open Blank
+          </button>
+        </div>
+        <div class="cookie-popup" id="cookie-popup">
+          <p>By using Night, you accept to us using cookies to: save your game progress and site settings. By clicking "I Understand", you agree to our use of cookies.</p>
+          <button id="accept-cookies">I Understand</button>
+        </div>
+      </div>
+
+      <div class="tab-content" id="themes">
+        <div class="content text-center relative z-10 w-full mt-2">
+          <h1 class="text-1xl md:text-2xl font-bold transition-transform duration-300 ease-in-out hover:scale-110 glow-text mb-8">
+            Select a Theme:
+          </h1>
+          <div class="flex flex-wrap justify-center gap-4 mb-6">
+            <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme1')">
+              Default
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme2')">
+              Light Mode
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme3')">
+              Scarlet Horizon
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme4')">
+              Beach
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme5')">
+              Twilight Alleyway
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme6')">
+              A Stray
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme9')">
+              Pondering Cat
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme10')">
+              Overlooking Japan
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme7')">
+              Sakura Biome
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme8')">
+              Walk by the beach
+             </button>
+             <button class="theme-button bg-gray-800 text-white" onclick="setTheme('theme9')">
+              Pondering Cat
+             </button>
+          </div>
+        </div>
+        <div class="content text-center relative z-10 w-full mt-2">
+          <h1 class="text-1xl md:text-2xl font-bold transition-transform duration-300 ease-in-out hover:scale-110 glow-text mb-8">
+            Set Background Image:
+          </h1>
+          <div class="flex flex-col items-center">
+            <input class="custom-input w-full mb-4 bg-gray-800 text-white" id="backgroundImageUrl" placeholder="Enter background image URL" type="text"/>
+            <button class="theme-button bg-gray-800 text-white" onclick="applyBackgroundImage(); location.reload();">Apply Background</button>
+            <button class="theme-button mt-2 bg-gray-800 text-white" onclick="removeBackgroundImage(); location.reload();">Remove Background</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="user">
+        <div class="content text-center relative z-10 w-full mt-2">
+          <h1 class="text-1xl md:text-2xl font-bold transition-transform duration-300 ease-in-out hover:scale-110 glow-text mb-8">
+            Username
+          </h1>
+          <p class="text-sm text-gray-300 mb-6">
+            Change your username to personalize your greeting message when you visit the site. Your current greeting will update automatically.
+          </p>
+          <div class="flex flex-col items-center mb-6">
+            <input class="custom-input w-full mb-4 bg-gray-800 text-white" id="usernameInput" placeholder="Enter your username" type="text"/>
+            <div class="flex flex-wrap justify-center gap-4">
+              <button id="saveUsername" class="theme-button bg-gray-800 text-white flex items-center">
+                <img src="data/website icons/username.png" alt="User Icon" class="mr-2" height="20" width="20">
+                Save Username
+              </button>
+              <button id="clearUsername" class="theme-button bg-gray-800 text-white flex items-center">
+                <img src="data/website icons/trash.png" alt="Clear Icon" class="mr-2" height="20" width="20">
+                Clear Username
+              </button>
+            </div>
+          </div>
+          <div id="currentUsername" class="text-sm text-gray-300 mt-4"></div>
+        </div>
+        <div class="content text-center relative z-10 w-full mt-6">
+          <h1 class="text-1xl md:text-2xl font-bold transition-transform duration-300 ease-in-out hover:scale-110 glow-text mb-8">
+            Download & Load Data
+          </h1>
+          <p class="text-sm text-gray-300 mb-6">
+            Download & Load your website data, this works by downloading your website's cache making it so that you can transfer your data like games & settings from site to site in case one gets blocked so you don't lose anything.
+          </p>
+          <div class="flex flex-col items-center mb-6">
+            <div class="flex flex-wrap justify-center gap-4 mb-6">
+              <button id="downloadsave" class="theme-button bg-gray-800 text-white flex items-center">
+                <img src="data/website icons/download.png" alt="Download Icon" class="mr-2" height="20" width="20">
+                Download Save
+              </button>
+              <button id="uploadsave" class="theme-button bg-gray-800 text-white flex items-center">
+                <img src="data/website icons/upload.png" alt="Upload Icon" class="mr-2" height="20" width="20">
+                Upload Save
+              </button>
+              <input type="file" id="loadCacheFile" style="display: none;" accept=".save">
+            </div>
+          </div>
+        </div>
+
+        <div class="content text-center relative z-10 w-full mt-6">
+          <h1 class="text-1xl md:text-2xl font-bold transition-transform duration-300 ease-in-out hover:scale-110 glow-text mb-8">
+            Delete All Data
+          </h1>
+          <p class="text-sm text-gray-300 mb-6">
+            Delete all your website data including game progress, settings, and preferences. This action cannot be undone, so make sure to download your save first if you want to keep anything.
+          </p>
+          <div class="flex flex-col items-center mb-6">
+            <button id="deletedata" class="theme-button flex items-center bg-red-600 hover:bg-red-700">
+              <img src="data/website icons/trash.png" alt="Delete Icon" class="mr-2" height="20" width="20">
+              Delete All Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script id="starsScript" src="js/stars.js"></script>
+  <script src="data/assets/js/topbar.js"></script>
+  <script src="data/assets/js/tabcloaking.js"></script>
+  <script src="data/assets/js/themes.js"></script>
+  <script src="data/assets/js/cookies.js"></script>
+  <script src="data/assets/js/scripts.js"></script>
+</body>
+</html>

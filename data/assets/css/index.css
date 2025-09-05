@@ -1,0 +1,202 @@
+body {
+  background-color: var(--background-color);
+  background-image: var(--background-image);
+  background-size: cover;
+  background-position: center;
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s, background-image 0.3s;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.nav-link {
+  color: var(--text-color);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+.image-button {
+  cursor: pointer;
+  background: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 0;
+  margin: 0;
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.image-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 2px solid var(--primary-color);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.image-button:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes rainbow {
+  0% { color: red; }
+  14% { color: orange; }
+  28% { color: yellow; }
+  42% { color: green; }
+  57% { color: blue; }
+  71% { color: indigo; }
+  85% { color: violet; }
+  100% { color: red; }
+}
+
+.rainbow-text {
+  animation: rainbow 5s linear infinite;
+}
+
+@keyframes appear {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.typing-effect span {
+  opacity: 0;
+  animation: appear 0.5s forwards;
+  color: var(--text-color);
+}
+
+.typing-effect span:nth-child(1) { animation-delay: 0s; }
+.typing-effect span:nth-child(2) { animation-delay: 0.2s; }
+.typing-effect span:nth-child(3) { animation-delay: 0.4s; }
+.typing-effect span:nth-child(4) { animation-delay: 0.6s; }
+.typing-effect span:nth-child(5) { animation-delay: 0.8s; }
+.typing-effect span:nth-child(6) { animation-delay: 1.0s; }
+
+:root {
+  --primary-color: #000000;
+}
+
+.content {
+  margin-top: 5vh;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+.games-button {
+  height: 40px;
+  padding: 0 25px; /* Increased horizontal padding to make it longer */
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(79, 70, 229, 0); 
+  margin-top: 1.5rem; 
+}
+
+.games-button:hover {
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.8); 
+  transform: scale(1.05);
+}
+
+#notification-container {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.notification {
+  position: relative;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  animation: slideIn 1s ease-out;
+  overflow: hidden;
+  min-width: 250px;
+  font-size: 1rem;
+}
+
+.notification .close-btn {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-image: url('images/website icons/close.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.notification .timer-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background-color: var(--text-color);
+  width: 100%;
+  animation: timer 4s linear forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes timer {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+
+

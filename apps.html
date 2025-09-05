@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Apps | Night</title>
+  <link id="favicon" rel="icon" href="favicon.ico" type="image/png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  </style>
+</head>
+<body class="bg-black text-white flex flex-col items-center justify-center min-h-screen relative">
+  <div class="stars"></div>
+  <div class="content text-center relative z-10 mt-24 w-full max-w-6xl px-4">
+    <div class="search-container mb-4">
+      <i class="fa fa-search"></i>
+      <input type="text" id="search-input" placeholder="Search through over 550 games available!" class="px-4 py-2 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+    <div class="starred-section">
+      <p class="text-6lg md:text-6xl font-bold transition-transform duration-300 ease-in-out hover:scale-105 glow-text typing-effect mb-8">
+      </p>
+      <div id="starred-grid"></div>
+    </div>
+    <p class="text-5lg md:text-5xl font-bold transition-transform duration-300 ease-in-out hover:scale-105 glow-text typing-effect mb-4">
+      <span>A</span><span>p</span><span>p</span><span>s</span>
+    </p>
+    
+    <p class="copyright-message text-center text-white-400 text-lg mb-8 rainbow-text">
+      « all apps on this site are complete copyright and property to their respective owners »
+    </p>
+    <div id="game-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+      <div class="game-card">
+        <p>
+          App Name
+          <i class="favorite-star far fa-star"></i>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div id="cookie-popup" class="cookie-popup">
+    <p>By using Night, you accept to us using cookies to: save your game progress and site settings. By clicking "I Understand", you agree to our use of cookies.</p>
+    <button id="accept-cookies">I Understand</button>
+  </div>
+
+  <script src="data/assets/js/stars.js"></script>
+  <script src="data/assets/js/apps.js"></script>
+  <script src="data/assets/js/topbar.js"></script>
+  <script src="data/assets/js/tabcloaking.js"></script>
+  <script src="data/assets/js/themes.js"></script>
+  <script src="data/assets/js/appfavorites.js"></script>
+  <script src="data/assets/js/cookies.js"></script>
+</body>
+</html>

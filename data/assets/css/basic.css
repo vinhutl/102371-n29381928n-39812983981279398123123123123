@@ -1,0 +1,54 @@
+    body {
+      background-color: var(--background-color);
+      background-image: var(--background-image);
+      background-size: cover;
+      background-position: center;
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s, background-image 0.3s;
+    }
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      will-change: transform;
+    }
+    .nav-link {
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .nav-link:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    .glow-text {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+                   0 0 20px rgba(255, 255, 255, 0.3),
+                   0 0 30px rgba(255, 255, 255, 0.2);
+    }
+        /* Smooth hover transitions */
+        .hover-scale {
+          transition: transform 0.3s ease-in-out;
+        }
+        .hover-scale:hover {
+          transform: scale(1.05);
+        }
+        .hover-scale-lg {
+          transition: transform 0.3s ease-in-out;
+        }
+        .hover-scale-lg:hover {
+          transform: scale(1.1);
+        }
+        .hover-opacity {
+          transition: opacity 0.3s ease-in-out;
+        }
+        .hover-opacity:hover {
+          opacity: 0.8;
+        }

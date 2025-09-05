@@ -1,0 +1,55 @@
+:root {
+  --primary-color: #181c24;
+  --text-color: #FFFFFF;
+  --input-border: #4a5568;
+  --popup-background: rgba(24, 28, 36, 0.95); /* Add a new variable for the popup background */
+}
+
+.cookie-popup {
+  position: fixed;
+  bottom: 55px;
+  left: 20px;
+  right: 20px;
+  background-color: var(--primary-color); /* Use the new variable */
+  color: var(--text-color);
+  padding: 20px;
+  text-align: center;
+  display: none;
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Fixed the box-shadow syntax */
+  max-width: 300px;
+}
+
+.cookie-popup p {
+  margin: 0 0 15px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.cookie-popup button {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.cookie-popup button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--text-color);
+}
+
+/* Mobile-specific styles */
+@media (max-width: 768px) {
+  .cookie-popup {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    max-width: none;
+  }
+}
